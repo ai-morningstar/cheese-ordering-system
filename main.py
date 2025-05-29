@@ -275,17 +275,17 @@ def main():
     show_basic_info = st.sidebar.checkbox("Show Simple Query", value=True)
     if show_basic_info:
         st.sidebar.markdown("""
-        ### Basic Interactions
+        ### Simple Query
         - **All Cheese**: I want to know all cheeses you have.
-        - **Total Number Of Cheese**: Use keywords like 'code example', 'syntax', or 'how-to' to get relevant code snippets.
-        - **All Sliced Cheese**: Switch to 'Updates' mode to browse the latest Streamlit updates in detail.
+        - **Total Number Of Cheese**: How many kinds of cheeses do you have in total?
+        - **All Sliced Cheese**: Show me all sliced cheese.
         """)
 
     # Display advanced interactions
     show_advanced_info = st.sidebar.checkbox("Show Advanced Query", value=False)
     if show_advanced_info:
         st.sidebar.markdown("""
-        ### Advanced Interactions
+        ### Advanced Query
         - **Calculate Wholesale Price**: If you have wholesale cheese, I'd like to buy 11, how much would it cost?
         - **Unexpected Query**: Can you show me all goat cheese?
         - **Weight Filter**: Get all cheeses whose price per lb is between 3 and 5, and sort by popularity (most popular first).
@@ -309,8 +309,9 @@ def main():
 # Add theme toggle in sidebar
 with st.sidebar:
     st.header("Settings")
-    st.header("**Source**: https://shop.kimelo.com/department/cheese/3365")
-    
+    st.html("<div>Source: <a href='https://shop.kimelo.com/department/cheese/3365'>Here</a></div>")
+    st.markdown("**AI Agent with**")
+    st.markdown("Reasoning & Human-in-the-loop")
     # Initialize button state in session state if not exists
     if 'is_auto_updating' not in st.session_state:
         st.session_state.is_auto_updating = False
@@ -337,10 +338,10 @@ with st.sidebar:
     # Create a container for file uploader and button
     upload_container = st.container()
     with upload_container:
-        uploaded_file = st.file_uploader("Update DB using file", type=['csv', 'json'])
+        uploaded_file = st.file_uploader("Update DB", type=['csv', 'json'])
         
         # Toggle button label based on state
-        button_label = "Scrap from shop.kimelo.com/" if st.session_state.is_auto_updating else "Scrap from shop.kimelo.com/"
+        button_label = "Scrap from website" if st.session_state.is_auto_updating else "Scrap from website"
         auto_btn = st.button(button_label, key="auto_update_btn", use_container_width=True)
         
         if auto_btn:
@@ -367,7 +368,7 @@ with st.sidebar:
             st.session_state.is_auto_updating = False
 
 st.title("🧀 Cheese Ordering Assistant")
-st.caption("🚀  A Streamlit chatbot powered made by braden-ai")
+st.caption("🚀 Made by Braden")
 
 # Chat interface
 if "messages" not in st.session_state:
