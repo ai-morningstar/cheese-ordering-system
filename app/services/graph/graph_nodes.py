@@ -80,7 +80,7 @@ def reasoner_node(state: GraphState):
     return {"history": history, "selected": selected, "input_query": input_query}
 
 @traceable
-def ambiguit_resolver_node(state: GraphState):
+def human_in_the_loop_node(state: GraphState):
     history = state["history"]
     response = model.invoke(history[-1]["plan"])
     history[-1]["observation"] = "This question is not clear."

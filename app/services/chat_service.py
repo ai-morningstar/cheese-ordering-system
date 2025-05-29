@@ -8,7 +8,7 @@ from app.core.config import settings, ModelType
 from app.services.graph.graph_state import GraphState
 from app.services.graph.graph_nodes import (
     reasoner_node,
-    ambiguit_resolver_node,
+    human_in_the_loop_node,
     compare_action_node,
     txt2pinecone_node,
     txt2mongo_node,
@@ -28,14 +28,14 @@ class ChatService:
         
         # Add nodes
         workflow.add_node("reasoner", reasoner_node)
-        workflow.add_node("ambiguit_resolver", ambiguit_resolver_node)
+        workflow.add_node("human_in_the_loop", human_in_the_loop_node)
         workflow.add_node("compare_action", compare_action_node)
         workflow.add_node("txt2mongo", txt2mongo_node)
         workflow.add_node("txt2pinecone", txt2pinecone_node)
         workflow.add_node("data_retrieval", data_retrieval_node)
         # Add edges
         workflow.add_edge(START, "reasoner")
-        workflow.add_edge("ambiguit_resolver", "reasoner")
+        workflow.add_edge("human_in_the_loop", "reasoner")
         workflow.add_edge("txt2mongo", "reasoner")
         workflow.add_edge("txt2pinecone", "reasoner")
         workflow.add_edge("data_retrieval", END)
@@ -43,7 +43,7 @@ class ChatService:
             "reasoner",
             lambda state: state["selected"],
             {
-                "ambiguit_resolver": "ambiguit_resolver",
+                "human_in_the_loop": "human_in_the_loop",
                 "compare_action": "compare_action",
                 "txt2mongo": "txt2mongo",
                 "txt2pinecone": "txt2pinecone",

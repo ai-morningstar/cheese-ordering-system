@@ -308,10 +308,12 @@ def main():
 
 # Add theme toggle in sidebar
 with st.sidebar:
-    st.header("Settings")
-    st.html("<div>Source: <a href='https://shop.kimelo.com/department/cheese/3365'>Here</a></div>")
-    st.markdown("**AI Agent with**")
+    
+    
+    st.header("**AI Agent with High Intelligence**")
     st.markdown("Reasoning & Human-in-the-loop")
+    
+    st.header("Settings")
     # Initialize button state in session state if not exists
     if 'is_auto_updating' not in st.session_state:
         st.session_state.is_auto_updating = False
@@ -342,6 +344,7 @@ with st.sidebar:
         
         # Toggle button label based on state
         button_label = "Scrap from website" if st.session_state.is_auto_updating else "Scrap from website"
+        st.html("<h3 style='text-align: center;'>Source: <a href='https://shop.kimelo.com/department/cheese/3365'>  Here  </a></h3>")
         auto_btn = st.button(button_label, key="auto_update_btn", use_container_width=True)
         
         if auto_btn:
@@ -393,7 +396,7 @@ if prompt := st.chat_input():
         st.markdown(f'<div style="padding: 1em; border-radius: 1em; background: #23272f; color: #fff; margin-bottom: 0.5em;">{prompt}</div>', unsafe_allow_html=True)
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Show thinking indicator
-    with st.spinner("Thinking..."):
+    with st.spinner("This may take a while, I am thinking..."):
         result = chat_service.process_message(prompt, st.session_state.messages)
 
     
