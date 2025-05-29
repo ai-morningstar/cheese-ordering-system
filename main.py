@@ -272,24 +272,24 @@ def main():
     st.sidebar.markdown("---")
 
     # Display basic interactions
-    show_basic_info = st.sidebar.checkbox("Show Basic Interactions", value=True)
+    show_basic_info = st.sidebar.checkbox("Show Simple Query", value=True)
     if show_basic_info:
         st.sidebar.markdown("""
         ### Basic Interactions
-        - **Ask About Streamlit**: Type your questions about Streamlit's latest updates, features, or issues.
-        - **Search for Code**: Use keywords like 'code example', 'syntax', or 'how-to' to get relevant code snippets.
-        - **Navigate Updates**: Switch to 'Updates' mode to browse the latest Streamlit updates in detail.
+        - **All Cheese**: I want to know all cheeses you have.
+        - **Total Number Of Cheese**: Use keywords like 'code example', 'syntax', or 'how-to' to get relevant code snippets.
+        - **All Sliced Cheese**: Switch to 'Updates' mode to browse the latest Streamlit updates in detail.
         """)
 
     # Display advanced interactions
-    show_advanced_info = st.sidebar.checkbox("Show Advanced Interactions", value=False)
+    show_advanced_info = st.sidebar.checkbox("Show Advanced Query", value=False)
     if show_advanced_info:
         st.sidebar.markdown("""
         ### Advanced Interactions
-        - **Generate an App**: Use keywords like **generate app**, **create app** to get a basic Streamlit app code.
-        - **Code Explanation**: Ask for **code explanation**, **walk me through the code** to understand the underlying logic of Streamlit code snippets.
-        - **Project Analysis**: Use **analyze my project**, **technical feedback** to get insights and recommendations on your current Streamlit project.
-        - **Debug Assistance**: Use **debug this**, **fix this error** to get help with troubleshooting issues in your Streamlit app.
+        - **Calculate Wholesale Price**: If you have wholesale cheese, I'd like to buy 11, how much would it cost?
+        - **Unexpected Query**: Can you show me all goat cheese?
+        - **Weight Filter**: Get all cheeses whose price per lb is between 3 and 5, and sort by popularity (most popular first).
+        - **Price Compare**: What is the cheapest cheese?
         """)
 
     st.sidebar.markdown("---")
@@ -309,7 +309,7 @@ def main():
 # Add theme toggle in sidebar
 with st.sidebar:
     st.header("Settings")
-    st.header("DB Update")
+    st.header("**Source**: https://shop.kimelo.com/department/cheese/3365")
     
     # Initialize button state in session state if not exists
     if 'is_auto_updating' not in st.session_state:
@@ -340,7 +340,7 @@ with st.sidebar:
         uploaded_file = st.file_uploader("Update DB using file", type=['csv', 'json'])
         
         # Toggle button label based on state
-        button_label = "Auto update DB" if st.session_state.is_auto_updating else "Auto update DB"
+        button_label = "Scrap from shop.kimelo.com/" if st.session_state.is_auto_updating else "Scrap from shop.kimelo.com/"
         auto_btn = st.button(button_label, key="auto_update_btn", use_container_width=True)
         
         if auto_btn:
@@ -367,7 +367,7 @@ with st.sidebar:
             st.session_state.is_auto_updating = False
 
 st.title("🧀 Cheese Ordering Assistant")
-st.caption("🚀 A Streamlit chatbot powered by OpenAI")
+st.caption("🚀  A Streamlit chatbot powered made by braden-ai")
 
 # Chat interface
 if "messages" not in st.session_state:
